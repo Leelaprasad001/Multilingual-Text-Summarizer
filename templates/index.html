@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Text Summarizer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/3224a0ed16.js" crossorigin="anonymous"></script>
+  <style>
+    .t{
+      z-index: 10;
+    }
+    .title{
+        text-align: center;
+        margin-top: 3%;
+        padding: 5px;
+        color: aliceblue;
+    }
+    .title h2{
+      font-size: 30px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+    }
+    .title p{
+      letter-spacing: .5px;
+    }
+    .f{
+      margin-top: 30px;
+    }
+    textarea {
+        overflow-y: scroll;
+        height:360px;
+        width: 70%;
+        resize: none; 
+    }
+    .btn{
+      margin-top: 3%;
+      margin-left: 46%;
+      letter-spacing: 1px;
+    }
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      display: block;
+      background-color: #0e4166;
+      background-image: linear-gradient(to bottom, rgba(14, 65, 102, 0.86), #0e4166);
+      z-index:-1;
+    }
+  .f p{
+    margin-left: 2%;
+    letter-spacing: .5px;
+    color:aliceblue;
+    font-size:18px;
+    text-transform:uppercase;
+  }
+  </style>
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="bg">
+      <stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
+      <stop offset="50%" style="stop-color:rgba(76, 190, 255, 0.6)"></stop>
+      <stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
+    </linearGradient>
+    <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
+  </defs>
+  <g>
+    <use xlink:href='#wave' opacity=".3">
+      <animateTransform>
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        dur="10s"
+        calcMode="spline"
+        values="270 230; -334 180; 270 230"
+        keyTimes="0; .5; 1"
+        keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+        repeatCount="indefinite" />
+    </use>
+    <use xlink:href='#wave' opacity=".6">
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        dur="8s"
+        calcMode="spline"
+        values="-270 230;243 220;-270 230"
+        keyTimes="0; .6; 1"
+        keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+        repeatCount="indefinite" />
+    </use>
+    <use xlink:href='#wave' opacty=".9">
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        dur="6s"
+        calcMode="spline"
+        values="0 230;-140 200;0 230"
+        keyTimes="0; .4; 1"
+        keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+        repeatCount="indefinite" />
+    </use>
+  </g>
+</svg>
+
+
+
+
+<div class="container t">
+  <div class="row title">
+      <h2>Multilingual Text Summarizer</h2>
+      <p>Lets understand your data easily and quickly without wasting your time</p>
+  </div>
+  <form action="/summarize" method="POST">
+    <div class="row f">
+      <div class="col-6">
+        <p>Input Text <span style="margin-left:72%;font-size:14px !important;text-transform:lowercase;cursor:pointer;" id="clear-text">Clear <i class="fa-solid fa-arrows-rotate"></i><span></p>
+  
+        <textarea id="text1" name="text1" class="form-control">{{ input_text }}</textarea>
+      </div>
+      <div class="col-6">
+        <p>Summary 
+          <span style="text-transform:lowercase;font-size:14px;margin-left:5%;">
+            <label for="language">Choose language : </label> &nbsp
+            <select id="language" name="lang">
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="te">Telugu</option>
+              <option value="ar">Arabic</option>
+              <option value="bn">Bengali</option>
+              <option value="pt">Portuguese</option>
+              <option value="da">Danish</option>
+              <option value="nl">Dutch</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="el">Greek</option>
+              <option value="gu">Gujarati</option>
+              <option value="hu">Hungarian</option>
+              <option value="id">Indonesian</option>
+              <option value="it">Italian</option>
+              <option value="ja">Japanese</option>
+              <option value="ka">Kannada</option>
+              <option value="kn">Korean</option>
+              <option value="ml">Malayalam</option>
+              <option value="mr">Marathi</option>
+              <option value="ro">Romanian</option>
+              <option value="ru">Russian</option>
+              <option value="zh-CN">Chinese</option>
+              <option value="tr">Turkish</option>
+              <option value="ur">Urdu</option>
+              <option value="uk">Ukrainian</option>
+              <option value="vi">Vietnamese</option>
+            </select>
+          </span>
+          <span style="margin-left:31%;font-size:14px; text-transform:lowercase; cursor:pointer;" id="copy-text">Copy <i class="fa-solid fa-copy"></i><span>
+        </p>
+        <textarea id="text2" name="text2" class="form-control">{{ output_text }}</textarea>
+      </div>
+    </div>
+    <input type="submit" value="summarize" class="btn btn-success">
+  </form>
+</div>
+
+ <!--=============== MAIN JS ===============-->
+ <script>
+  document.getElementById("clear-text").addEventListener("click", function() {
+    document.getElementById("text1").value = "";
+  });
+
+  document.getElementById("copy-text").addEventListener("click", function() {
+    var textarea = document.getElementById("text2");
+    textarea.select();
+    document.execCommand("copy");
+  });
+  
+ </script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>
